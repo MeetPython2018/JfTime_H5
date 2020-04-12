@@ -41,13 +41,18 @@ export default new Router({
               {
                   path:'search',
                   component: search
+              },
+              {
+                path: 'About',
+                name: 'About',
+                component: About
+              },
+              {
+                path: 'PersonalCenter',
+                name:'PersonalCenter',
+                component:PersonalCenter
               }
           ]
-      },
-      {
-          path: '/About',
-          name: 'About',
-          component: About
       },
       {
           path: '/Telegram',
@@ -63,11 +68,6 @@ export default new Router({
           path: '/SignIn',
           name: 'SignIn',
           component: SignIn
-      },
-      {
-          path: '/PersonalCenter',
-          name:'PersonalCenter',
-          component:PersonalCenter
       }
   ]
 })

@@ -328,35 +328,40 @@
               }
               this.$emit('upupEvent',skip)
               var type = this.$route.params.author
-              console.log(type)
               var offset = (val-1)*5
             },
             // 音频控件
             playAudio(audio_src,audio_name,creator,index){
-            this.index = index
-            const ap = new APlayer({
-                container: document.getElementById('player'),
-                fixed: false,
-                autoplay: true,
-                listFolded: true,
-                listMaxHeight: 90,
-                audio: [
-                    {name: audio_name,
-                    artist: creator,
-                    url: audio_src,
-                    cover: '',
-                    }
-                ]
-                })
-            ap.on('pause', ()=>{
-                this.index = ''
-
-            });
-            ap.on('play', ()=>{
+                console.log(123)
+                let audio_infos = {
+                    'audio_src':audio_src,
+                    'audio_name':audio_name,
+                    'creator':creator,
+                    'index':index,
+                }
                 this.index = index
-            });
-            console.log(this.index)
-            this.demo = ap
+                this.$emit('load_audio',audio_infos)
+              // const ap = new APlayer({
+              //   container: document.getElementById('player'),
+              //   fixed: false,
+              //   autoplay: true,
+              //   listFolded: true,
+              //   listMaxHeight: 90,
+              //   audio: [
+              //       {name: audio_name,
+              //       artist: creator,
+              //       url: audio_src,
+              //       cover: '',
+              //       }
+              //   ]
+              //   })
+              // ap.on('pause', ()=>{
+              //   this.index = ''
+              // });
+              // ap.on('play', ()=>{
+              //   this.index = index
+              // });
+              // this.demo = ap
         },
       }
   }

@@ -21,7 +21,7 @@
                         <el-menu-item index="/Home/search">搜一搜</el-menu-item>
                     </el-menu>
                 </div>
-                <router-view :first-page-date="first_page_date" :infos="infos" :dataLength="dataLength" @upupEvent="upupEvent" :key="key"></router-view>
+                <router-view :first-page-date="first_page_date" :infos="infos" :dataLength="dataLength" @upupEvent="upupEvent" @load_audio="load_audio" :key="key"></router-view>
                 <div id="bottom">
                         <el-footer class="col-sm-12 col-xs-8">
                             <div class="links">
@@ -184,7 +184,6 @@
               fits:'fill',
               first_page_data:'',
               activeIndex: '/Home/HotAudio',
-
               data_len:0,
                 demo_data_len:'',
                 all_data:'',
@@ -200,34 +199,34 @@
       },
         methods:{
           // 音频控件
-          playAudio(audio_src,audio_name,creator,index){
-            this.index = index
-            this.demo.destroy()
-            const ap = new APlayer({
-                container: document.getElementById('player'),
-                fixed: false,
-                autoplay: true,
-                listFolded: true,
-                listMaxHeight: 90,
-                audio: [
-                    {name: audio_name,
-                    artist: creator,
-                    url: audio_src,
-                    cover: '',
-                    }
-                ]
-                })
-            ap.on('pause', ()=>{
-                this.index = ''
+            playAudio(audio_src,audio_name,creator,index){
+              this.index = index
+              this.demo.destroy()
+              const ap = new APlayer({
+                  container: document.getElementById('player'),
+                  fixed: false,
+                  autoplay: true,
+                  listFolded: true,
+                  listMaxHeight: 90,
+                  audio: [
+                      {name: audio_name,
+                      artist: creator,
+                      url: audio_src,
+                      cover: '',
+                      }
+                  ]
+                  })
+              ap.on('pause', ()=>{
+                  this.index = ''
 
-            });
-            ap.on('play', ()=>{
-                this.index = index
-            });
-            console.log(this.index)
-            this.demo = ap
-        },
-          handleSelect(key, keyPath){
+              });
+              ap.on('play', ()=>{
+                  this.index = index
+              });
+              console.log(this.index)
+              this.demo = ap
+            },
+            handleSelect(key, keyPath){
               if(key.substr(-4,4) === 'jfmt'){
                   this.dataLength = this.demo_data_len['data1_len']
                   this.items = 'jfmt'
@@ -247,14 +246,17 @@
                     this.infos = {"title":'川普推推推',"title_son":'通過推特總統，了解美國，了解正常人類秩序，一起為未來的中國尋找智慧和久違的神性。',"dataLength":this.demo_data_len['data3_len']}
                 }
           },
-          upupEvent:function (val) {
+            upupEvent:function (val) {
               console.log(val)
               fetch("/ajax/jftime/handleCurrentChange?objects="+val.object+"&offset="+val.offset).then(function (e) {
                 return e.json()
             }).then((e)=>{
                 this.first_page_date = e
             })
-          }
+          },
+            load_audio:function (val) {
+                this.$emit('load_audio_top',val)
+            }
       },
         async mounted() {
             fetch("/ajax/jftime/PullAudios").then(function (e) {

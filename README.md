@@ -6,8 +6,9 @@
 
 ```python
 #  python3.5以后venv创建/激活/退出虚拟环境
-python3 -m venv .    #  创建虚拟环境
-source bin/activate    #  激活虚拟环境
+python3 -m venv myvenv    #  创建虚拟环境
+linux系统 ： source bin/activate    #  激活虚拟环境
+windows系统 ： cd myvenv/Scripts .\activate
 deactivate  #  退出虚拟环境
 
 #  virtualenv用于创建独立的Python环境，多个Python相互独立，互不影响
