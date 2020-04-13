@@ -1,11 +1,12 @@
 <template>
-    <div id="signIn">
-        <div class="container-full">
-            <div class="cons">
-                <div class="login-div">
-                    <div class="logo"></div>
-                      <div class="title">江峰时刻</div>
-                      <div class="fields">
+  <div id="signIn">
+    <div class="container-full">
+      <div class="cons">
+        <el-main>
+          <div class="login-div">
+            <div class="logo"></div>
+            <div class="title">江峰时刻</div>
+            <div class="fields">
                         <div class="username">
                             <i class="iconfont icon-youxiang-copy"></i>
                             <input type="username"  @blur="checking" v-model="email" class="user-input" placeholder="username" />
@@ -16,69 +17,131 @@
                             <input type="password" v-model="password" class="pass-input" placeholder="password" />
                         </div>
                       </div>
-                      <button class="signin-button" @click="Login">Login</button>
-                      <div class="link">
-                          <a href="#">Forgot password ?</a> or <router-link to="/SignUp">Sign up</router-link>
-                      </div>
-                </div>
+            <button class="signin-button" @click="Login">Login</button>
+            <div class="link">
+              <a href="#">Forgot password ?</a> or <router-link to="/SignUp">Sign up</router-link>
             </div>
-        </div>
+          </div>
+        </el-main>
+      </div>
+      <div id="bottom">
+        <el-footer class="col-sm-12 col-xs-8">
+          <div class="links">
+              <a href="https://www.youtube.com"  target="_blank"><i class="iconfont icon-youtobe"></i></a>
+              <a href="https://www.twitter.com" target="_blank"><i class="iconfont icon-twitter"></i></a>
+              <a href="https://www.facebook.com" target="_blank"><i class="iconfont icon-icon-facebook"></i></a>
+            </div>
+            <div class="words">
+              <em>越是習慣,別人越是得寸進尺。</em>
+              <em>越是懼怕,别人越是肆無忌憚。</em>
+            </div>
+        </el-footer>
+      </div>
     </div>
+  </div>
 </template>
 <style scoped>
-    * {
+  * {
         padding: 0;
         margin: 0;
         font-family: '苹方';
     }
-    #signIn {
-        width: 100%;
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        height: 35rem;
-        background: #ecf0f3;
+  #signIn {
+      width: 100%;
+      height: auto;
+      font-family: 'Avenir', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
     }
+  .container-full{
+      background: #f7f7f7!important;
+  }
+  .el-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+  }
+  .cons{
+    width: 100%;
+    background: #f7f7f7;
+  }
+  .el-main{
+    width: 100%!important;
+    max-width: 1260px!important;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0 auto;
+  }
+  .login-div{
+    width: 21rem;
+    /*height: 26rem;*/
+    height: auto;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    border-radius: 2rem;
+    background: #ecf0f3;
+    box-shadow: 13px 13px 20px #cbced1,
+          -13px -13px 20px #ffffff;
+    margin: 2rem 0;
+  }
+  @media screen and (max-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
     .container-full{
-        width: 100%;
-        height: 100%;
-        max-width: 1260px;
-        padding: 0 1.5rem;
-        margin: 0 auto;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .el-main{
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .login-div{
-        width: 21rem;
-        /*height: 26rem;*/
-        height: auto;
-        padding: 2rem 1.5rem 1.5rem 1.5rem;
+      width: 28rem;
+      height: auto;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      border-radius: 2rem;
+      background: #ecf0f3;
+      box-shadow: 13px 13px 20px #cbced1,
+            -13px -13px 20px #ffffff;
+      margin-top: 4rem;
+      font-size: .64rem;
+    }
+    .login-div .signin-button{
+        outline: none;
+        border:none;
+        cursor: pointer;
+        width:100%;
+        height: 4rem;
         border-radius: 2rem;
-        background: #ecf0f3;
-        box-shadow: 13px 13px 20px #cbced1,
-              -13px -13px 20px #ffffff;
-        margin-top: 2rem;
+        font-size: .64rem;
+        font-weight: 700;
+        font-family: 'Lato', sans-serif;
+        color:#fff;
+        text-align: center;
+        background: #24cfaa;
+        box-shadow: 3px 3px 8px #b1b1b1,
+                    -3px -3px 8px #ffffff;
+        transition: 0.5s;
+      }
+    #bottom{
+        height: 8rem;
+      }
+    .icon-youtobe,.icon-twitter,.icon-icon-facebook{
+      font-size: 2rem!important;
     }
-    @media screen and (max-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-        .container-full{
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-      .login-div{
-            width: 28rem;
-            height: auto;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            border-radius: 2rem;
-            background: #ecf0f3;
-            box-shadow: 13px 13px 20px #cbced1,
-                  -13px -13px 20px #ffffff;
-            margin-top: 2rem;
-        }
-    }
-    .logo {
+    #bottom footer{
+        height: 8rem!important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+  }
+  .logo {
       background:url("../assets/logo_sign.png");
       width: 5rem;
       height: 5rem;
@@ -96,7 +159,7 @@
       ;
         background-size: 100% 100%;
     }
-    .title {
+  .title {
         height: auto;
       text-align: center;
       font-size: 1.2rem;
@@ -106,11 +169,11 @@
         align-items: center;
         justify-content: center;
     }
-    .fields {
+  .fields {
       width: 100%;
       padding: .5rem .25rem .25rem .25rem;
     }
-    .fields input {
+  .fields input {
       border: none;
       outline:none;
       background: none;
@@ -118,11 +181,11 @@
       color: #555;
       padding: .89rem .5rem .89rem .25rem;
     }
-    .iconfont{
+  .iconfont{
         color: #BEBFC4;
         padding-right: 1rem;
     }
-    .username, .password {
+  .username, .password {
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -131,11 +194,20 @@
       box-shadow: inset 8px 8px 8px #cbced1,
                   inset -8px -8px 8px #ffffff;
     }
-    .icon-youxiang-copy,.icon-mima{
+  .icon-youxiang-copy,.icon-mima{
         color: #BEBFC4;
         padding: 0 .5rem 0 1rem;
-    }
-    .signin-button {
+  }
+  .icon-youtobe{
+    color: #D31C1F;
+  }
+  .icon-twitter{
+    color: #1CA0F1;
+  }
+  .icon-icon-facebook{
+    color: #3B5998
+  }
+  .signin-button {
       outline: none;
       border:none;
       cursor: pointer;
@@ -152,111 +224,95 @@
                   -3px -3px 8px #ffffff;
       transition: 0.5s;
     }
-    .signin-button:hover {
+  .signin-button:hover {
       background:#2fdbb6;
     }
-    .signin-button:active {
+  .signin-button:active {
       background:#1da88a;
     }
-    .link {
+  .link {
       padding-top: 20px;
       text-align: center;
     }
-    .link a {
+  .link a {
       text-decoration: none;
       color:#aaa;
       font-size: 15px;
     }
-
-    .row{
-        /*width: 100%;*/
-        /*height: auto;*/
-        /*padding: 2rem 0;*/
-        margin: 2rem auto;
-        width:430px;
-        height: 500px;
-        padding: 60px 35px 35px 35px;
-        border-radius: 40px;
-        background: #ecf0f3;
-        box-shadow: 13px 13px 20px #cbced1,
-              -13px -13px 20px #ffffff;
-    }
-    .el-main {
-        padding: 0 !important;
-        max-width: 1260px !important;
-        margin: 0 auto;
-        background: #f5f5f5 !important;
-    }
-
-    .demo-ruleForm {
-        width: 30rem;
-        height: auto;
-        background: #fff;
-        padding: 2rem;
-        margin: 0 auto;
-        border-radius: 1rem;
-    }
-    .title{
+  .title{
         height: 2.5rem;
         font-size: 1.1rem;
         color: #a06619;
         line-height: 2.5rem;
         margin-bottom: 1rem;
-    }
-    .el-form-item__label{
-        width: 5rem!important;
-    }
-    .btns{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .btns .el-form-item__content {
+  }
+  .btns .el-form-item__content {
         margin-left: 0 !important;
-    }
-
-    .btns img {
-        width: 6.5rem;
-        height: 5rem;
-        /*margin-left: 0!important;*/
-    }
-    .el-button{
-        padding: .5rem 1rem;
-        display: flex;
-        justify-items: center;
-        align-items: center;
-        font-size: .64rem;
-    }
-
-    .codde {
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        margin-bottom: 1rem;
-    }
-
-    .code img {
+  }
+  .btns img {
+    width: 6.5rem;
+    height: 5rem;
+  }
+  .code img {
         width: 6rem;
     }
-    .code-input {
-        width: 6rem;
-        float: left;
-        margin-right: 1rem;
-    }
-    .SignUp{
-        height: 2.5rem;
-        line-height: 2.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1.2rem;
-    }
-    .SignUp .session{
-        font-size: .64rem;
-    }
-    .SignUp a{
-        font-size: .64rem;
-    }
+  .SignUp .session{
+    font-size: .64rem;
+  }
+  .SignUp a{
+    font-size: .64rem;
+  }
+  /*底部样式*/
+  #bottom{
+      width: 100%;
+      background: #fff!important;
+  }
+  .el-footer{
+      width: 100%!important;
+      max-width: 1260px!important;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 3.5rem!important;
+  }
+  .links{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .el-footer .links a{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      margin-right: 1rem;
+  }
+  .el-footer .links a:last-child{
+      margin-right: 0;
+  }
+  .el-footer .links i{
+      font-size: 1.5rem;
+  }
+  .el-footer .words{
+      margin-left: 1rem;
+  }
+  .el-footer .words em{
+      font-size: .72rem;
+      letter-spacing: .05rem;
+  }
+  .el-footer .words em:first-child{
+      margin-right: .5rem;
+      /*margin-left: 6.4rem;*/
+  }
+  .el-carousel__item h3 {
+      color: #475669;
+      font-size: 18px;
+      opacity: 0.75;
+      line-height: 300px;
+      margin: 0;
+  }
 </style>
 <script>
     import store from "../store";
@@ -306,7 +362,6 @@
                             store.commit('login_in')
                             store.commit('setUserName',this.email)
                             this.saveState()
-                            console.log(response.data)
                             this.$router.push('/Home/hotAudio')
                         }else{
                             this.$notify({

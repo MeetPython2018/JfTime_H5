@@ -18,7 +18,7 @@
                   </div>
                   <span class="pc">主页</span>
                 </li>
-                <li class="nav-item" @click="routerTo('/Home/About')">
+                <li class="nav-item" @click="routerTo('/About')">
                   <div class="phone">
                     <i class="iconfont icon-about"></i>
                     <span>关于</span>
@@ -44,6 +44,11 @@
                 </li>
               </ul>
             </nav>
+            <div class="audio_menu">
+              <div class="audio_img">
+            <div id="player" class="aplayer"></div>
+          </div>
+            </div>
           </el-header>
         </div>
       </el-container>
@@ -70,7 +75,7 @@
   /*导航栏*/
   .navs{
       width: 100%;
-      background: #2C4FA9!important;
+      background: #1DA1F2!important;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -86,7 +91,7 @@
   }
   .navbar{
       height: 3.5rem;
-      background: #2C4FA9!important;
+      background: #1DA1F2!important;
       padding: 0;
   }
   .navbar-collapse{
@@ -106,7 +111,7 @@
       width: 30%;
       height: 3.5rem;
       font-size: .89rem;
-      background: #2C4FA9!important;
+      background: #1DA1F2!important;
       right: 0;
       color: #fff!important;
       display: flex;
@@ -138,9 +143,9 @@
       font-size: 1.2rem;
   }
   .el-image{
-      background: #a06619;
-      width: 9rem;
-      height: 3.5rem;
+      background: #1DA1F2;
+      width: 6.4rem;
+      height: 2.4rem;
   }
   /* 可以设置不同的进入和离开动画 */
   .fade-enter-active, .fade-leave-active {
@@ -156,104 +161,117 @@
     .el-image{
         display: none;
     }
-      .el-container,.el-header{
+    .el-container,.el-header{
           height: 5rem!important;
-      }
-      .navs{
-          height: 100%;
-      }
-      .nav-items{
-          width: 100%;
-      }
-      .nav-items{
-          height: 5rem;
-      }
-      .phone{
-          display: flex;
-          flex-direction: column;
-      }
-      .phone img{
-          width: 2rem;
-          height: 2rem;
-          margin-top: .64rem;
-      }
-      .phone i{
-          display: block;
-          height: 2.5rem;
-      }
-      .phone span{
-          height: 2.5rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 1rem;
-      }
-      .pc{
-          display: none;
-      }
-      #user-img{
-          display: none;
-      }
-      .nav-item{
-          height: 3.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-      }
-      .icon-zhuye1,.icon-about{
-          font-size: 2rem;
-      }
-      .icon-dianyuan{
-          font-size: 2.2rem;
-      }
+    }
+    .navs{
+        height: 100%;
+    }
+    .nav-items{
+        width: 100%;
+    }
+    .nav-items{
+        height: 5rem;
+    }
+    .phone{
+        display: flex;
+        flex-direction: column;
+    }
+    .phone img{
+        width: 2rem;
+        height: 2rem;
+        margin-top: .64rem;
+    }
+    .phone i{
+        display: block;
+        height: 2.5rem;
+    }
+    .phone span{
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+    }
+    .pc{
+        display: none;
+    }
+    #user-img{
+        display: none;
+    }
+    .nav-item{
+        height: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon-zhuye1,.icon-about{
+        font-size: 2rem;
+    }
+    .icon-dianyuan,.icon-user-outline{
+        font-size: 2.2rem;
+    }
 
+  }
+  /*播放按钮*/
+  .audio_menu{
+    position: fixed;
+    height: 3.5rem;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    width: 15rem;
+    border: 0!important;
+    z-index: 1200;
+    color: #333;
   }
 </style>
 <script>
   import store from "./store";
   import APlayer from 'aplayer'
   export default {
-      data() {
-        return {
-            login:'',
-            jfTime:'http://120.77.223.229:100/JfTime/net_img/jfTime.png',
-            logo_index:'http://120.77.223.229:100/net_index/Hope.jfif',
-            routers:[
-                {
-                    id:0,
-                    name:'Home',
-                    router:'/Home'
-                },
-                {
-                    id:1,
-                    name:'About',
-                    router:'/Home/About'
-                },
-                {
-                    id:2,
-                    name:'Sign in',
-                    router:'/SignIn'
-                }
-            ],
-            index:0,
-            font_chose:'color:#ccc;',
-            font_chosed:'color:#fff;'
-    };
-      },
-      methods:{
-          routerTo(val){
+    data() {
+      return {
+        login:'',
+        jfTime:'http://120.77.223.229:100/JfTime/net_img/jfTime.png',
+        logo_index:'http://120.77.223.229:100/JfTime/net_img/JF_logo.png',
+        routers:[
+          {
+            id:0,
+            name:'Home',
+            router:'/Home'
+          },
+          {
+            id:1,
+            name:'About',
+            router:'/About'
+          },
+          {
+            id:2,
+            name:'Sign in',
+            router:'/SignIn'
+          }
+        ],
+        index:0,
+        font_chose:'color:#ccc;',
+        font_chosed:'color:#fff;'
+      };
+    },
+    methods:{
+      routerTo(val){
               this.$router.push(val)
           },
-          errorHandler() {
+      errorHandler() {
             return false
           },
-          // 进入我的中心
-          enterMyCenter(){
+      // 进入我的中心
+      enterMyCenter(){
             this.$router.push({name:'PersonalCenter'})
           },
-          // 退出登录
-          SignOut(){
+      // 退出登录
+      SignOut(){
               this.$axios({
                   methods: 'get',
                   url:'/ajax/sign_out',
@@ -267,95 +285,94 @@
                   }
               })
           },
-          // 获取音频
-          load_audio_top:function (val) {
-              console.log(val)
-
-              const ap = new APlayer({
-                container: document.getElementById('player'),
-                fixed: false,
-                autoplay: true,
-                listFolded: true,
-                listMaxHeight: 90,
-                audio: [
-                    {name: val.audio_name,
-                    artist: val.creator,
-                    url: val.audio_src,
-                    cover: '',
-                    }
-                ]
-                })
-              ap.on('pause', ()=>{
-                this.index = ''
-              });
-              ap.on('play', ()=>{
-                this.index = val.index
-              });
-              this.demo = ap
-          }
-    },
-      created(){
-          fetch("/ajax/get_sessions").then(function (e) {
-              return e.json()
-          }).then((e)=>{
-              if(e.sessions==='ok'){
-                  this.login = true
-              }else {
-                  this.login = false
-              }
-          })
-        var url = this.$route.name
-          console.log(url)
-        if(url===null){
-                this.$router.push('/Home/HotAudio')
-                this.index = 0
-            }else if(url==='About'){
-                this.$router.push('/Home/About')
-                this.index = 1
-            }else if(url==='SignUp'){
-                this.$router.push('/SignUp')
-                this.index = 2
-            }else if(url==='ShowTime'){
-                this.$router.push('/Home/ShowTime')
-                this.index = 3
-            }else if(url==='SignIn'){
-                this.$router.push('/SignIn')
-                this.index = 4
+      // 获取音频
+      load_audio_top:function (val) {
+        const ap = new APlayer({
+          container: document.getElementById('player'),
+          fixed: false,
+          autoplay: true,
+          listFolded: true,
+          listMaxHeight: 90,
+          audio: [
+            {
+              name: val.audio_name,
+              artist: val.creator,
+              url: val.audio_src,
+              cover: '',
             }
+          ]
+        })
+        ap.on('pause', ()=>{
+          this.index = ''
+        });
+        ap.on('play', ()=>{
+          this.index = val.index
+        });
+        this.demo = ap
+      }
     },
-      updated(){
+    created(){
+      fetch("/ajax/get_sessions").then(function (e) {
+        return e.json()
+      }).then((e)=>{
+        if(e.sessions==='ok'){
+          this.login = true
+        }else{
+          this.login = false
+        }
+      })
+      var url = this.$route.name
+      // console.log(url)
+      if(url===null){
+        this.$router.push('/Home/HotAudio')
+        this.index = 0
+      }else if(url==='About'){
+        this.$router.push('/About')
+        this.index = 1
+      }else if(url==='SignUp'){
+        this.$router.push('/SignUp')
+        this.index = 2
+      }else if(url==='ShowTime'){
+        this.$router.push('/Home/ShowTime')
+        this.index = 3
+      }else if(url==='SignIn'){
+        this.$router.push('/SignIn')
+        this.index = 4
+      }
+    },
+    updated(){
           // if(sessionStorage.getItem('state')){
           //     let demo = JSON.parse(sessionStorage.getItem('state'))
           //     this.login = demo.logined
           // }
-          fetch("/ajax/get_sessions").then(function (e) {
-              return e.json()
-          }).then((e)=>{
-              if(e.sessions==='ok'){
-                  this.login = e.sessions
-              }
-          })
+      fetch("/ajax/get_sessions").then(function (e) {
+        return e.json()
+      }).then((e)=>{
+        if(e.sessions==='ok'){
+          this.login = e.sessions
+        }
+      })
+    },
+    watch: {
+      '$route' (to, from) {
+        // console.log(to.path)
+        if(to.path==='/Home'){
+          this.$router.push('/Home/HotAudio')
+          this.index = 0
+        }else if(to.path==='/About'){
+          this.$router.push('/About')
+          this.index = 1
+        }else if(to.path==='/SignIn'){
+          this.$router.push('/SignIn')
+          this.index = 2
+        }else if(to.path==='/ShowTime'){
+          this.$router.push('/Home/ShowTime')
+          this.index = 3
+        }else if(to.path==='/SignUp'){
+          this.$router.push('/SignUp')
+          this.index = 4
+        }
       },
-      watch: {
-        '$route' (to, from) {
-            console.log(to.path)
-            if(to.path==='/Home'){
-                this.$router.push('/Home/HotAudio')
-                this.index = 0
-            }else if(to.path==='/Home/About'){
-                this.$router.push('/Home/About')
-                this.index = 1
-            }else if(to.path==='/SignIn'){
-                this.$router.push('/SignIn')
-                this.index = 2
-            }else if(to.path==='/ShowTime'){
-                this.$router.push('/Home/ShowTime')
-                this.index = 3
-            }else if(to.path==='/SignUp'){
-                this.$router.push('/SignUp')
-                this.index = 4
-            }
-        },
     },
   }
 </script>

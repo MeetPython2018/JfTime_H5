@@ -16,11 +16,11 @@
               <div class="item">
                 <div class="jiemu row">
                   <div style="width: 300px" class="col-xs-6 col-lg-2" v-for="todo in first_page_hotAudios" :key="todo.title">
-                    <el-image :src="todo.cover_src">
-                                                  <div slot="placeholder" class="image-slot">
-                                                    加载中<span class="dot">...</span>
-                                                  </div>
-                                                </el-image>
+                    <el-image :src="todo.cover_src" @click="viweImg">
+                      <div slot="placeholder" class="image-slot">
+                        加载中<span class="dot">...</span>
+                      </div>
+                    </el-image>
                     <h4 class="title">
                       {{todo.title}}
                     </h4>
@@ -70,27 +70,27 @@
   </div>
 </template>
 <style scoped>
-  * {
-        padding: 0;
-        margin: 0;
-        font-family: Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-    }
+  *{
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  }
   #HotAudio {
-        width: 100%;
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        background: #f7f7f7;
-    }
+    width: 100%;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background: #f7f7f7;
+  }
   .el-container{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
   /*音频卡片样式*/
   #center{
     width: 100%;
@@ -119,43 +119,46 @@
     z-index: 1200;
   }
   .jf_audio{
-      width: 100%;
-      height: auto;
-      list-style: none;
-      margin: 1rem 0;
+    width: 100%;
+    height: auto;
+    list-style: none;
+    margin: 1rem 0;
   }
   .jf_audio .el-divider i{
-      margin-left: .5rem;
+    margin-left: .5rem;
   }
   .jf_audio .item{
-      width: 100%;
-      height: auto;
-      position: relative;
+    width: 100%;
+    height: auto;
+    position: relative;
   }
   .jf_audio .item .jiemu{
-      height: auto;
-      margin: 0;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+    height: auto;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
   .jf_audio .item .jiemu .col-lg-2{
-      margin-bottom: 1rem;
-      margin-right: 1rem;
-      display: flex;
-      flex-basis: 10rem;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0!important;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-basis: 10rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0!important;
   }
   .jf_audio .item .jiemu div{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      transition: all .5s;
-      background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: all .5s;
+    background: #fff;
+  }
+  .jf_audio .item .jiemu div:hover{
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
   }
   .jf_audio  .item .jiemu div .el-image{
       width: 10rem;
@@ -313,171 +316,164 @@
   }
 </style>
 <script>
-    import APlayer from 'aplayer'
-    import store from "../store";
-    export default {
-        name: "HotAudio",
-        data() {
-            return {
-                btnStyle:'el-icon-video-play',
-                active: '',
-                id:'',
-                index:0,
-                play:0,
-                audio_menu:'',
-                flag: false,
-                demo: '',
-                // 节目总数
-                hotAudios:[],
-                first_page_hotAudios:[],
-                dataLength:11,
-                fits:'fill',
-                data_len:'',
-                dialogVisible: false,
-                count: 0,
-                loading: false
-            };
-        },
-        methods:{
-            //  翻页
-            handleCurrentChange(val){
-              var offset = (val-1)*5
-              console.log(offset)
-              this.first_page_hotAudios = this.hotAudios.slice(offset,offset+5)
-            },
-            // 音频控件
-            playAudio(audio_src,audio_name,creator,index){
-              this.index = index
-              // this.demo.destroy()
-              const ap = new APlayer({
-                  container: document.getElementById('player'),
-                  fixed: false,
-                  autoplay: true,
-                  listFolded: true,
-                  listMaxHeight: 90,
-                  audio: [
-                      {name: audio_name,
-                      artist: creator,
-                      url: audio_src,
-                      cover: '',
-                      }
-                  ]
-                  })
-              ap.on('pause', ()=>{
-                  this.index = ''
-
-              });
-              ap.on('play', ()=>{
-                  this.index = index
-              });
-              this.demo = ap
-            },
-            message(el){
-              fetch("/ajax/get_sessions").then(function (e) {
-                return e.json()
-                  }).then((e)=>{
-                      console.log(e)
-                      if(e.sessions==='ok'){
-                          var author= el
-                          this.$prompt('To the:'+author,'评论' ,{
-                              confirmButtonText: '确定',
-                              cancelButtonText: '取消',
-                              inputType:'textarea',
-                              showClose:true,
-                              inputPattern: /^.{1,100}$/,
-                              inputErrorMessage: '评论不能为空，或超出一百字'
-                            }).then(({ value }) => {
-                                var time_stamp = (new Date()).valueOf()
-                                var user = store.state.username
-                                this.$axios({
-                                    method:'post',
-                                    url:'/ajax/comment',
-                                    headers:{
-                                        'Content-Type': 'application/x-www-form-urlencoded',
-                                    },
-                                    data:this.qs.stringify({
-                                        user:user,
-                                        comment:value,
-                                        time_stamp:time_stamp,
-                                        audio_id:author
-                                    })
-                                }).then((res)=>{
-                                    if(res.data.status==='success'){
-                                        this.$message({
-                                            type: 'success',
-                                            message: '评论成功！'
-                                        });
-                                    }else {
-                                        this.$message({
-                                            type: 'waring',
-                                            message: '评论失败！'
-                                        });
-                                    }
-                                })
-                            }).catch(() => {
-                              this.$message({
-                                type: 'info',
-                                message: '取消评论！'
-                              });
-                          });
-                      }
-                      else{
-                          this.$message({
-                            type: 'waring',
-                            message: '请先登录！'
-                          });
-                      }
-                  })
-          },
-            seeMessages(val){
-              this.$axios.get('/ajax/seeMessages',{params:{
-                    audio_id:val
-              }
-                }).then((res)=>{
-                  console.log(res)
-                  if(res.data.length===0){
-                      this.count=0
-                      this.loading = false
-                  }else{
-                      this.count = res.data
-                      this.loading = false
-                  }
-                  this.dialogVisible = true
+  import store from "../store";
+  export default {
+    name: "HotAudio",
+    data() {
+      return {
+        btnStyle:'el-icon-video-play',
+        active: '',
+        id:'',
+        index:0,
+        play:0,
+        audio_menu:'',
+        flag: false,
+        demo: '',
+        // 节目总数
+        hotAudios:[],
+        first_page_hotAudios:[],
+        dataLength:0,
+        fits:'fill',
+        data_len:'',
+        dialogVisible: false,
+        count: 0,
+        loading: false
+      };
+    },
+    methods:{
+      //  翻页
+      handleCurrentChange(val){
+        var offset = (val-1)*5
+        this.first_page_hotAudios = this.hotAudios.slice(offset,offset+5)
+      },
+      // 音频控件
+      playAudio(audio_src,audio_name,creator,index){
+        let demo = this.$store.state.playAudio(audio_src,audio_name,creator,index)
+        this.$emit('load_audio',demo)
+      },
+      message(el){
+        this.$axios.get('/ajax/get_sessions').then((res => {
+          console.log(res)
+          if(res.data.sessions === 'ok'){
+            var author= el
+            this.$prompt('To the:'+author,'评论' ,{
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              inputType:'textarea',
+              showClose:true,
+              inputPattern: /^.{1,100}$/,
+              inputErrorMessage: '评论不能为空，或超出一百字'
+            }).then(({ value }) => {
+              var time_stamp = (new Date()).valueOf()
+              var user = store.state.username
+              this.$axios({
+                method:'post',
+                url:'/ajax/comment',
+                headers:{
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                data:this.qs.stringify({
+                  user:user,
+                  comment:value,
+                  time_stamp:time_stamp,
+                  audio_id:author
+                })
+              }).then((res)=>{
+                if(res.data.status==='success'){
+                  this.$message({
+                    type: 'success',
+                    message: '评论成功！'
+                  });
+                }else {
+                  this.$message({
+                    type: 'waring',
+                    message: '评论失败！'
+                  });
+                }
               })
-
-            },
-            like(){
-                this.$message({
-                  message: '收藏节目成功！',
-                  type: 'success'
-                });
-            },
-            load () {
-                this.loading = false
-                setTimeout(() => {
-                    // this.count += 2
-                    this.loading = false
-                }, 2000)
-            }
-        },
-        computed: {
-            noMore () {
-                return this.count >= 50
-            },
-            disabled () {
-                return this.loading || this.noMore
-            }
-        },
-        async mounted() {
-          // 获取音频
-          fetch("/ajax/jftime/hotAudios").then(function (e) {
-                return e.json()
-          }).then((e)=>{
-              this.first_page_hotAudios = e.slice(0,5)
-              this.hotAudios = e
-              this.dataLength = 11
-          })
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '取消评论！'
+              });
+            });
+          }
+          else{
+            this.$message({
+              type: 'waring',
+              message: '请先登录！'
+            });
+          }
+        }))
+      },
+      seeMessages(val){
+        this.$axios.get('/ajax/seeMessages',{params:{
+            audio_id:val
+          }
+        }).then((res)=>{
+          if(res.data.length===0){
+            this.count=0
+            this.loading = false
+          }else{
+            this.count = res.data
+            this.loading = false
+          }
+          this.dialogVisible = true
+        })
+      },
+      like(){
+        this.$message({
+          message: '收藏节目成功！',
+          type: 'success'
+        });
+      },
+      load () {
+        this.loading = false
+        setTimeout(() => {
+          // this.count += 2
+          this.loading = false
+        }, 2000)
+      },
+      // 点击el-image出现的BUG
+      viweImg(){
+	      document.body.style = "";
+      },
+      function_axios:function (method,url,set_val) {
+        this.$axios({
+          method:method,
+          url:url,
+        }).then((res=>{
+          if(set_val==='all_data'){
+            console.log(res)
+            sessionStorage.setItem('hotAudioData',JSON.stringify(res.data))
+            this.first_page_hotAudios = res.data.slice(0,5)
+            this.hotAudios = res.data
+            this.dataLength = res.data.length
+          }else {
+            this.demo_data_len = res.data
+          }
+        }))
+      }
+    },
+    computed: {
+      noMore () {
+        return this.count >= 50
+      },
+      disabled () {
+        return this.loading || this.noMore
+      }
+    },
+    async mounted() {
+      // 获取音频
+      if(!sessionStorage.getItem('hotAudioData')){
+       this.function_axios('get','/ajax/jftime/hotAudios','all_data')
+      }else {
+        let demo = JSON.parse(sessionStorage.getItem('hotAudioData'))
+        this.first_page_hotAudios = demo.slice(0,5)
+        this.hotAudios = demo
+        this.dataLength = demo.length
       }
     }
+  }
 </script>
 
