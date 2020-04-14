@@ -9,15 +9,15 @@
             <div class="title">江峰时刻</div>
           </ul>
           <div class="fields">
-                        <div class="username">
+            <div class="username">
                             <i class="iconfont icon-youxiang-copy"></i>
                             <input type="username"  @blur="checking" v-model="email" class="user-input" placeholder="username" />
                         </div>
-                        <div class="password">
-                            <i class="iconfont icon-mima"></i>
-                            <input type="password"  maxlength="16" v-on:input="intensity" v-model="password" class="pass-input" placeholder="password" />
-                        </div>
-                          <div class="strong">
+            <div class="password">
+              <i class="iconfont icon-mima"></i>
+              <input type="password"  maxlength="16" v-on:input="intensity" v-model="password" class="pass-input" placeholder="password" />
+            </div>
+            <div class="strong">
                               <ul>
                                   <span>密码强度</span>
                                   <el-rate
@@ -43,7 +43,7 @@
                               </li>
                               </ul>
                           </div>
-                      </div>
+          </div>
           <button class="signin-button" @blur="Login">Login</button>
           <div class="link">
                           <a href="#">No account ?</a> or <router-link to="/SignIn">Sign in</router-link>

@@ -25,7 +25,7 @@
                   </div>
                   <span class="pc">关于</span>
                 </li>
-                <li class="nav-item" @click="routerTo('/SignIn')" v-if="!login">
+                <li class="nav-item" @click="routerTo('/Sign_')" v-if="!login">
                   <div class="phone">
                     <i class="iconfont icon-user-outline"></i>
                     <span>登录</span>
@@ -63,7 +63,6 @@
     padding: 0;
     margin: 0;
       font-family: Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-
   }
   #app {
     -webkit-font-smoothing: antialiased;
@@ -74,145 +73,144 @@
   }
   /*导航栏*/
   .navs{
-      width: 100%;
-      background: #1DA1F2!important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 3.5rem;
+    width: 100%;
+    background: #1DA1F2!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5rem;
   }
   .el-header{
-      width: 100%!important;
-      max-width: 1260px!important;
-      line-height: 3.5rem;
-      height: 3.5rem!important;
-      color: #fff;
-      padding: 0 1.5rem 0 1.1rem;
+    width: 100%!important;
+    max-width: 1260px!important;
+    line-height: 3.5rem;
+    height: 3.5rem!important;
+    color: #fff;
+    padding: 0 1.5rem 0 1.1rem;
   }
   .navbar{
-      height: 3.5rem;
-      background: #1DA1F2!important;
-      padding: 0;
+    height: 3.5rem;
+    background: #1DA1F2!important;
+    padding: 0;
   }
   .navbar-collapse{
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      z-index: 1000;
-      flex-direction: row!important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 1000;
+    flex-direction: row!important;
   }
   .navbar-nav{
-      height: 3.5rem!important;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    height: 3.5rem!important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .nav-items{
-      width: 30%;
-      height: 3.5rem;
-      font-size: .89rem;
-      background: #1DA1F2!important;
-      right: 0;
-      color: #fff!important;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    width: 30%;
+    height: 3.5rem;
+    font-size: .89rem;
+    background: #1DA1F2!important;
+    right: 0;
+    color: #fff!important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .nav-item{
-      list-style: none;
+    list-style: none;
   }
   .nav-item:hover{
-      cursor: pointer;
+    cursor: pointer;
   }
   .nav-items a{
-      text-decoration: none;
-      color: #fff!important;
-      list-style: none;
+    text-decoration: none;
+    color: #fff!important;
+    list-style: none;
   }
   #user-img{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   #user-img img{
-      width: 2rem;
-      height: 2rem;
-      margin-right: .5rem;
+    width: 2rem;
+    height: 2rem;
+    margin-right: .5rem;
   }
   #user-img i{
-      font-size: 1.2rem;
+    font-size: 1.2rem;
   }
   .el-image{
-      background: #1DA1F2;
-      width: 6.4rem;
-      height: 2.4rem;
+    background: #1DA1F2;
+    width: 6.4rem;
+    height: 2.4rem;
   }
   /* 可以设置不同的进入和离开动画 */
   .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s;
+    transition: opacity .5s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 0;
+    opacity: 0;
   }
   .phone{
-      display: none;
+    display: none;
   }
   @media screen and (max-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
     .el-image{
-        display: none;
+      display: none;
     }
     .el-container,.el-header{
-          height: 5rem!important;
+      height: 5rem!important;
     }
     .navs{
-        height: 100%;
+      height: 100%;
     }
     .nav-items{
-        width: 100%;
+      width: 100%;
     }
     .nav-items{
-        height: 5rem;
+      height: 5rem;
     }
     .phone{
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
     .phone img{
-        width: 2rem;
-        height: 2rem;
-        margin-top: .64rem;
+      width: 2rem;
+      height: 2rem;
+      margin-top: .64rem;
     }
     .phone i{
-        display: block;
-        height: 2.5rem;
+      display: block;
+      height: 2.5rem;
     }
     .phone span{
-        height: 2.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
     }
     .pc{
-        display: none;
+      display: none;
     }
     #user-img{
-        display: none;
+      display: none;
     }
     .nav-item{
-        height: 3.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+      height: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     .icon-zhuye1,.icon-about{
-        font-size: 2rem;
+      font-size: 2rem;
     }
     .icon-dianyuan,.icon-user-outline{
-        font-size: 2.2rem;
+      font-size: 2.2rem;
     }
-
   }
   /*播放按钮*/
   .audio_menu{
@@ -235,7 +233,6 @@
     data() {
       return {
         login:'',
-        jfTime:'http://120.77.223.229:100/JfTime/net_img/jfTime.png',
         logo_index:'http://120.77.223.229:100/JfTime/net_img/JF_logo.png',
         routers:[
           {
@@ -250,8 +247,8 @@
           },
           {
             id:2,
-            name:'Sign in',
-            router:'/SignIn'
+            name:'Sign',
+            router:'/Sign_'
           }
         ],
         index:0,
@@ -261,30 +258,29 @@
     },
     methods:{
       routerTo(val){
-              this.$router.push(val)
-          },
+        this.$router.push(val)
+      },
       errorHandler() {
-            return false
-          },
+        return false
+      },
       // 进入我的中心
       enterMyCenter(){
-            this.$router.push({name:'PersonalCenter'})
-          },
+        this.$router.push({name:'PersonalCenter'})
+      },
       // 退出登录
       SignOut(){
-              this.$axios({
-                  methods: 'get',
-                  url:'/ajax/sign_out',
-              }).then((response)=>{
-                  if(response.data.sign_out==='ok'){
-                      this.login = false
-                      store.commit('login_out')
-                      let demo = JSON.stringify({'logined':false,'username':''})
-                      sessionStorage.setItem('state',demo)
-                      console.log(store)
-                  }
-              })
-          },
+        this.$axios({
+          methods: 'get',
+          url:'/ajax/sign_out',
+        }).then((response)=>{
+          if(response.data.sign_out==='ok'){
+            this.login = false
+            store.commit('login_out')
+            let demo = JSON.stringify({'logined':false,'username':''})
+            sessionStorage.setItem('state',demo)
+          }
+        })
+      },
       // 获取音频
       load_audio_top:function (val) {
         const ap = new APlayer({
@@ -322,22 +318,15 @@
         }
       })
       var url = this.$route.name
-      // console.log(url)
       if(url===null){
         this.$router.push('/Home/HotAudio')
         this.index = 0
       }else if(url==='About'){
         this.$router.push('/About')
         this.index = 1
-      }else if(url==='SignUp'){
-        this.$router.push('/SignUp')
+      }else if(url==='Sign_'){
+        this.$router.push('/Sign_')
         this.index = 2
-      }else if(url==='ShowTime'){
-        this.$router.push('/Home/ShowTime')
-        this.index = 3
-      }else if(url==='SignIn'){
-        this.$router.push('/SignIn')
-        this.index = 4
       }
     },
     updated(){
@@ -355,22 +344,15 @@
     },
     watch: {
       '$route' (to, from) {
-        // console.log(to.path)
         if(to.path==='/Home'){
           this.$router.push('/Home/HotAudio')
           this.index = 0
         }else if(to.path==='/About'){
           this.$router.push('/About')
           this.index = 1
-        }else if(to.path==='/SignIn'){
-          this.$router.push('/SignIn')
+        }else if(to.path==='/Sign_'){
+          this.$router.push('/Sign_')
           this.index = 2
-        }else if(to.path==='/ShowTime'){
-          this.$router.push('/Home/ShowTime')
-          this.index = 3
-        }else if(to.path==='/SignUp'){
-          this.$router.push('/SignUp')
-          this.index = 4
         }
       },
     },
