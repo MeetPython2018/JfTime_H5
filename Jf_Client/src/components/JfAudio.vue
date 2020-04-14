@@ -15,7 +15,7 @@
               </div>
               <div class="item">
                 <div class="jiemu row">
-                  <div style="width: 300px" class="col-xs-6 col-lg-2" v-for="todo in firstPageDate" :key="todo.title">
+                  <div style="width: 300px" class="col-xs-6 col-lg-2" v-for="todo in firstPageData" :key="todo.title">
                     <el-image :src="todo.cover_src" @click="viweImg">
                       <div slot="placeholder" class="image-slot">
                         加载中<span class="dot">...</span>
@@ -292,21 +292,21 @@
   export default {
     name: "JfAudio",
     props:{
-      'firstPageDate':{
-                type: Array,
-                default:function(){
-                    return [];
-                }
-            },
+      'firstPageData':{
+        type: Array,
+        default:function(){
+          return [];
+        }
+      },
       'infos': {
-                type: Object,
-                default:function () {
-                    return {}
-                }
-            },
+        type: Object,
+        default:function () {
+          return {}
+        }
+      },
       "dataLength":{
-                type: Number
-            }
+        type: Number
+      }
     },
     data(){
       return {
@@ -339,14 +339,14 @@
     methods:{
       //  上下翻页
       handleCurrentChange(val){
-          var skip = {
-            "object": this.$route.params.author,
-            "offset": (val-1)*5
-          }
-          this.$emit('upupEvent',skip)
-          var type = this.$route.params.author
-          var offset = (val-1)*5
-        },
+        var skip = {
+          "object": this.$route.params.author,
+          "offset": (val-1)*5
+        }
+        this.$emit('upupEvent',skip)
+        var type = this.$route.params.author
+        var offset = (val-1)*5
+      },
       // 音频控件
       playAudio(audio_src,audio_name,creator,index){
         let demo = this.$store.state.playAudio(audio_src,audio_name,creator,index)

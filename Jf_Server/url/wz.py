@@ -10,7 +10,7 @@ wz = Blueprint('wz', __name__)
 app = Flask(__name__)
 
 
-@wz.route("/dataAudio")
+@wz.route("/dataAudio")          # 第一页数据的获取
 def dataAudio():
     lock.acquire()
     cursor.execute("SELECT * FROM wenzhao order by `index` desc limit 10;")
@@ -19,7 +19,7 @@ def dataAudio():
     return json.dumps(result)
 
 
-@wz.route("/dataLength")            #获取节目数，进行分页
+@wz.route("/dataLength")            # 获取节目数，进行分页
 def dataLength():
     demo_dict = {}
     lock.acquire()
@@ -30,7 +30,7 @@ def dataLength():
     return json.dumps(demo_dict)
 
 
-@wz.route("/handleCurrentChange")
+@wz.route("/handleCurrentChange")       # 点击上一页、下一页
 def handleCurrentChange():
     offset = int(request.args.get('offset'))
     cursor.execute("SELECT * FROM wenzhao order by `index` desc limit %s,10", offset)

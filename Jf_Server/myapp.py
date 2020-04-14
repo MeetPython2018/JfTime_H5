@@ -39,8 +39,8 @@ def sign_up():
     password = request.args.get('password')
     lock.acquire()
     cursor.execute("SELECT * FROM users where username = %s",userName)
-    result = cursor.fetchall()
     lock.release()
+    result = cursor.fetchall()
     md5 = hashlib.md5()
     demo_md5 = password.encode(encoding='utf-8')
     md5.update(demo_md5)
@@ -64,8 +64,8 @@ def sign_in():
     pass_md5 = md5.hexdigest()
     lock.acquire()
     cursor.execute("SELECT * FROM users where username = %s and password = %s",(userName,pass_md5))
-    result = cursor.fetchall()
     lock.release()
+    result = cursor.fetchall()
     if(result):
         sign_in = {"sign_in":200}
         session['login'] = 'ok'
@@ -78,7 +78,6 @@ def sign_in():
 
 @app.route("/ajax/get_sessions")
 def get_sessions():
-    print(session.get('login'))
     ss = {"sessions":session.get('login')}
     return json.dumps(ss)
 
@@ -94,8 +93,8 @@ def seeMessages():
     id = request.args.get('audio_id')
     lock.acquire()
     cursor.execute('Select * from comment where audio=%s',id)
-    result = cursor.fetchall()
     lock.release()
+    result = cursor.fetchall()
     return json.dumps(result)
 
 
@@ -106,9 +105,82 @@ def comment():
     audio_id = request.form['audio_id']
     comments = request.form['comment']
     time_stamp = request.form['time_stamp']
+    lock.acquire()
     cursor.execute("Insert into comment (content,users,audio,comment_time) values(%s,%s,%s,%s)",(comments,user,audio_id,time_stamp))
     db.commit()
+    lock.release()
     return json.dumps({'status': 'success'})
+
+
+@app.route("/ajax/pullAudios")
+def pullAudios():
+    first_page_data = []
+    lock.acquire()
+    cursor.execute("Select * FROM jfmt order by `index` desc limit 5")
+    lock.release()
+    result1 = cursor.fetchall()
+    first_page_data.append(result1)
+    lock.acquire()
+    cursor.execute("SELECT * FROM today_history order by `index` desc limit 5")
+    lock.release()
+    result2 = cursor.fetchall()
+    first_page_data.append(result2)
+    lock.acquire()
+    cursor.execute("SELECT * FROM trump_twitter order by `index` desc limit 5;")
+    lock.release()
+    result3 = cursor.fetchall()
+    first_page_data.append(result3)
+    return json.dumps(first_page_data)
+
+
+@app.route("/ajax/hotAudios")
+def hotAudios():
+    first_page_data = []
+    lock.acquire()
+    cursor.execute("SELECT * FROM jfmt order by `index` desc limit 4")
+    lock.release()
+    result1 = cursor.fetchall()
+    first_page_data = first_page_data+result1
+    lock.acquire()
+    cursor.execute("SELECT * FROM today_history order by `index` desc limit 3")
+    lock.release()
+    result2 = cursor.fetchall()
+    first_page_data = first_page_data + result2
+    lock.acquire()
+    cursor.execute("SELECT * FROM trump_twitter order by `index` desc limit 2")
+    lock.release()
+    result3 = cursor.fetchall()
+    first_page_data = first_page_data + result3
+    lock.acquire()
+    cursor.execute("SELECT * FROM wenzhao order by `index` desc limit 4")
+    lock.release()
+    result4 = cursor.fetchall()
+    first_page_data = first_page_data + result4
+    return json.dumps(first_page_data)
+
+
+@app.route("/ajax/dataLength")            # 获取节目数，进行分页
+def dataLength():
+    demo_dict = {}
+    lock.acquire()
+    cursor.execute("SELECT COUNT(*) FROM jfmt")
+    lock.release()
+    result1 = cursor.fetchone()
+    demo_dict["data1_len"] = result1['COUNT(*)']
+    lock.acquire()
+    cursor.execute("SELECT COUNT(*) FROM today_history")
+    lock.release()
+    result2 = cursor.fetchone()
+    demo_dict["data2_len"] = result2['COUNT(*)']
+    cursor.execute("SELECT COUNT(*) FROM trump_twitter")
+    result3 = cursor.fetchone()
+    demo_dict["data3_len"] = result3['COUNT(*)']
+    lock.acquire()
+    cursor.execute("SELECT COUNT(*) FROM wenzhao")
+    lock.release()
+    result4 = cursor.fetchone()
+    demo_dict["data4_len"] = result4['COUNT(*)']
+    return json.dumps(demo_dict)
 
 
 if __name__ == '__main__':

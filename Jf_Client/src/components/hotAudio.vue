@@ -161,61 +161,61 @@
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
   }
   .jf_audio  .item .jiemu div .el-image{
-      width: 10rem;
-      height: 6rem;
-      padding: .5rem!important;
+    width: 10rem;
+    height: 6rem;
+    padding: .5rem!important;
   }
   .title{
-      width: 100%;
-      height: 3rem;
-      text-align: justify;
-      font-size: .64rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      line-height: 1rem;
-      overflow: hidden;
-      padding: 0 .5rem!important;
+    width: 100%;
+    height: 3rem;
+    text-align: justify;
+    font-size: .64rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1rem;
+    overflow: hidden;
+    padding: 0 .5rem!important;
   }
   .audioInfos{
-      width: 100%;
-      height: 1.5rem;
-      display: flex!important;
-      justify-content: space-between!important;
-      flex-direction: row!important;
-      align-items: center!important;
-      padding: .25rem .5rem;
+    width: 100%;
+    height: 1.5rem;
+    display: flex!important;
+    justify-content: space-between!important;
+    flex-direction: row!important;
+    align-items: center!important;
+    padding: .25rem .5rem;
   }
   .audioInfos span{
-      font-size: .64rem;
-      margin: 0;
-      font-family: 楷体;
+    font-size: .64rem;
+    margin: 0;
+    font-family: 楷体;
   }
   .tools{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 .5rem;
-      margin-bottom: .25rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    margin-bottom: .25rem;
   }
   .tools i{
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
   .icon-liuyan{
-      color: #24ACF2;
+    color: #24ACF2;
   }
   .icon-Dialogue{
-      color: #32DD90;
+    color: #32DD90;
   }
   .icon-xihuan{
-      color: #DD4F43;
+    color: #DD4F43;
   }
   @media screen and (max-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
     .col-xs-6{
-        width: 45%!important;
+      width: 45%!important;
     }
-      .jf_audio .item .jiemu .col-lg-2{
+    .jf_audio .item .jiemu .col-lg-2{
       margin-bottom: 1rem;
       margin-right: 1rem;
       display: flex;
@@ -225,64 +225,64 @@
       }
   }
   .el-menu--horizontal>.el-submenu .el-submenu__title{
-      height: 3rem!important;
+    height: 3rem!important;
   }
   .col-xs-6 .el-image{
-      width: 100%!important;
-      height: 100%;
+    width: 100%!important;
+    height: 100%;
   }
   .col-xs-6 .title{
-      height: 3.8rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      line-height: 1.3rem;
-      overflow: hidden;
+    height: 3.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.3rem;
+    overflow: hidden;
   }
   /*分页样式*/
   .el-pagination{
-      width: 100%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   .el-pager{
-      background: #fff;
+    background: #fff;
   }
   .el-pagination li{
-      margin: 0!important;
+    margin: 0!important;
   }
   /*分割线*/
   .divider{
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      font-size: 1.1rem;
-      color: #a06619;
-      padding: .64rem 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 1.1rem;
+    color: #a06619;
+    padding: .64rem 0;
   }
   .divider h4{
-      font-size: 1.1rem;
-      margin-bottom: .32rem;
+    font-size: 1.1rem;
+    margin-bottom: .32rem;
   }
   .divider h4 em{
-      font-style: normal;
-      margin-right: .5rem;
+    font-style: normal;
+    margin-right: .5rem;
   }
   .divider h5{
-      font-size: .64rem;
-      margin-right: .5rem;
+    font-size: .64rem;
+    margin-right: .5rem;
   }
   .el-image{
-      padding: 0!important;
-      box-shadow: none!important;
+    padding: 0!important;
+    box-shadow: none!important;
   }
   .el-icon-video-play,.el-icon-video-pause{
-      font-size: 1.6em;
-      color: #a06619;
+    font-size: 1.6em;
+    color: #a06619;
   }
   /*查看留言*/
   .el-dialog{
@@ -444,7 +444,6 @@
           url:url,
         }).then((res=>{
           if(set_val==='all_data'){
-            console.log(res)
             sessionStorage.setItem('hotAudioData',JSON.stringify(res.data))
             this.first_page_hotAudios = res.data.slice(0,5)
             this.hotAudios = res.data

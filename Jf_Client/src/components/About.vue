@@ -257,9 +257,9 @@
 </style>
 <script>
   export default {
-      name: "About",
-      data() {
-    return {
+    name: "About",
+    data() {
+      return {
         dialogTableVisible1: false,
         dialogTableVisible2: false,
         visible: false,
@@ -274,22 +274,22 @@
         trump_twitter_datas:0,
         wenzhao_datas:0,
     };
-  },
+    },
     methods:{
       viweImg(){
 	      document.body.style = "";
       }
     },
-      async mounted(){
-          fetch("/ajax/jftime/dataLength").then(function (e) {
-              return e.json()
-          }).then((e)=>{
-              this.jfmt_datas = e['data1_len']
-              this.historyToday_datas = e['data2_len']
-              this.trump_twitter_datas = e['data3_len']
-              this.wenzhao_datas = e['data4_len']
-          })
-      }
+    async mounted(){
+      fetch("/ajax/dataLength").then(function (e) {
+        return e.json()
+      }).then((e)=>{
+        this.jfmt_datas = e['data1_len']
+        this.historyToday_datas = e['data2_len']
+        this.trump_twitter_datas = e['data3_len']
+        this.wenzhao_datas = e['data4_len']
+      })
+    }
   }
 </script>
 

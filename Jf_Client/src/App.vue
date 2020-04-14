@@ -330,10 +330,10 @@
       }
     },
     updated(){
-          // if(sessionStorage.getItem('state')){
-          //     let demo = JSON.parse(sessionStorage.getItem('state'))
-          //     this.login = demo.logined
-          // }
+      // if(sessionStorage.getItem('state')){
+      //     let demo = JSON.parse(sessionStorage.getItem('state'))
+      //     this.login = demo.logined
+      // }
       fetch("/ajax/get_sessions").then(function (e) {
         return e.json()
       }).then((e)=>{
