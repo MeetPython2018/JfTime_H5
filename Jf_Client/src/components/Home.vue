@@ -16,7 +16,7 @@
             <el-menu-item index="/Home/search">搜一搜</el-menu-item>
           </el-menu>
         </div>
-        <router-view :first-page-data="first_page_data" :infos="infos" :dataLength="dataLength" @upupEvent="upupEvent" @load_audio="load_audio" :key="key"></router-view>
+        <router-view :first-page-data="first_page_data" :info="info" @upupEvent="upupEvent" @load_audio="load_audio" :key="key"></router-view>
         <div id="bottom">
           <el-footer class="col-sm-12 col-xs-8">
             <div class="links">
@@ -153,35 +153,30 @@
     data() {
       return {
         activeIndex: '/Home/HotAudio',
-        demo_data_len:'',
         all_data:'',
-        first_page_data: [],
-        infos:{},
-        dataLength:0,
-        data:'',
+        demo_data_len:'',
+        first_page_data: {},
+        info:{},
         title:'',
         title_son:''
       };
     },
     methods:{
       handleSelect(key, keyPath){
+        let firstPageDate_Demo =  JSON.parse(sessionStorage.getItem('firstPageDate_Demo'))
+        let info_Demo =  JSON.parse(sessionStorage.getItem('info_Demo'))
+        console.log(this.demo_data_len)
         if(key.substr(-4,4) === 'jfmt'){
-          this.dataLength = this.demo_data_len['data1_len']
-          this.items = 'jfmt'
-          this.first_page_data = this.all_data[0]
-          this.infos = {"title":'江峰漫谈',"title_son":'蹭熱點，不蹭熱鬧；看新聞，更看門道。',"dataLength":this.demo_data_len['data1_len']}
+          this.first_page_data = firstPageDate_Demo.slice(0,1)[0]
+          this.info = {"title":'江峰漫谈',"title_son":'蹭熱點，不蹭熱鬧；看新聞，更看門道。',"dataLength":info_Demo['data1_len']}
         }
         if(key.substr(-13,13) === 'today_history'){
-          this.dataLength = this.demo_data_len['data2_len']
-          this.items = 'today_history'
-          this.first_page_data = this.all_data[1]
-          this.infos = {"title":'历史上的今天',"title_son":'講出歷史真相，道出生命冷暖。',"dataLength":this.demo_data_len['data2_len']}
+          this.first_page_data = firstPageDate_Demo.slice(1,2)[0]
+          this.info = {"title":'历史上的今天',"title_son":'講出歷史真相，道出生命冷暖。',"dataLength":info_Demo['data2_len']}
         }
         if(key.substr(-13,13) === 'trump_twitter'){
-          this.dataLength = this.demo_data_len['data3_len']
-          this.items = 'trump_twitter'
-          this.first_page_data = this.all_data[2]
-          this.infos = {"title":'川普推推推',"title_son":'通過推特總統，了解美國，了解正常人類秩序，一起為未來的中國尋找智慧和久違的神性。',"dataLength":this.demo_data_len['data3_len']}
+          this.first_page_data = firstPageDate_Demo.slice(2,3)[0]
+          this.info = {"title":'川普推推推',"title_son":'通過推特總統，了解美國，了解正常人類秩序，一起為未來的中國尋找智慧和久違的神性。',"dataLength":info_Demo['data3_len']}
         }
       },
       upupEvent:function (val) {
@@ -199,22 +194,45 @@
           method:method,
           url:url,
         }).then((res=>{
-          console.log(res.data)
           if(set_val==='all_data'){
             this.all_data = res.data
+            sessionStorage.setItem('firstPageDate_Demo',JSON.stringify(this.all_data))
           }else {
             this.demo_data_len = res.data
+            sessionStorage.setItem('info_Demo',JSON.stringify(this.demo_data_len))
           }
         }))
+      },
+      setCurrentRoute() {
+        this.activeIndex= this.$route.path;    // 监听到当前路由状态并激活当前菜单
+        this.handleSelect(this.$route.path)
       }
     },
+    created(){
+      console.log('created')
+      this.setCurrentRoute();
+    },
     async mounted() {
-      this.function_axios('get','/ajax/jftime/pullAudios','all_data')
-      this.function_axios('get','/ajax/jftime/dataLength','demo_data_len')
+      console.log('mounted')
+      if(!sessionStorage.getItem('firstPageDate_Demo')){
+        this.function_axios('get','/ajax/jftime/pullAudios','all_data')
+      }else {
+        this.all_data = JSON.parse(sessionStorage.getItem('firstPageDate_Demo'))
+      }
+      if(!sessionStorage.getItem('info_Demo')){
+        this.function_axios('get','/ajax/jftime/dataLength','demo_data_len')
+      }else {
+        this.demo_data_len = JSON.parse(sessionStorage.getItem('info_Demo'))
+      }
     },
     computed:{
       key() {
         return this.$route.name !== undefined? this.$route.name + new Date(): this.$route + new Date()
+      }
+    },
+    watch:{
+      $route() {
+        this.setCurrentRoute();
       }
     }
   }

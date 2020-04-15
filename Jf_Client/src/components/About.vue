@@ -281,7 +281,7 @@
       }
     },
     async mounted(){
-      fetch("/ajax/dataLength").then(function (e) {
+      fetch("/ajax/jftime/dataLength").then(function (e) {
         return e.json()
       }).then((e)=>{
         this.jfmt_datas = e['data1_len']

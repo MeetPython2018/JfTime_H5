@@ -8,10 +8,10 @@
             <ul class="jf_audio">
               <div class="divider col-md-12 col-xs-8">
                 <h4>
-                  <span>{{infos.title}}</span>
+                  <span>{{info.title}}</span>
                   <i class="el-icon-microphone"></i>
                 </h4>
-                <h5>{{infos.title_son}}</h5>
+                <h5>{{info.title_son}}</h5>
               </div>
               <div class="item">
                 <div class="jiemu row">
@@ -39,7 +39,7 @@
                 <!--分页-->
                 <div class="block">
                   <el-pagination
-                    layout="prev, pager, next" :page-size="5" :total="dataLength"
+                    layout="prev, pager, next" :page-size="5" :total="info.dataLength"
                     @current-change="handleCurrentChange">
                   </el-pagination>
                 </div>
@@ -49,12 +49,12 @@
                     <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
                       <li v-for="i in count" class="list-item">
                         <div>
-                                                  <span><i class="iconfont icon-user-outline"></i> {{i.users}} <i class="iconfont icon-zhifeiji"></i> {{i.audio}}</span>
-                                                  <span> <i class="iconfont icon-riqi"></i> {{new Date(parseInt(i.comment_time)).toLocaleString().replace(/:\d{1,2}$/,' ')}}</span>
-                                              </div>
+                          <span><i class="iconfont icon-user-outline"></i> {{i.users}} <i class="iconfont icon-zhifeiji"></i> {{i.audio}}</span>
+                          <span> <i class="iconfont icon-riqi"></i> {{new Date(parseInt(i.comment_time)).toLocaleString().replace(/:\d{1,2}$/,' ')}}</span>
+                        </div>
                         <p>
-                                                  <i class="iconfont icon-huihua"></i> {{i.content}}
-                                              </p>
+                          <i class="iconfont icon-huihua"></i> {{i.content}}
+                        </p>
                       </li>
                     </ul>
                     <p v-if="loading">加载中...</p>
@@ -298,14 +298,11 @@
           return [];
         }
       },
-      'infos': {
+      'info': {
         type: Object,
         default:function () {
           return {}
         }
-      },
-      "dataLength":{
-        type: Number
       }
     },
     data(){
@@ -344,8 +341,6 @@
           "offset": (val-1)*5
         }
         this.$emit('upupEvent',skip)
-        var type = this.$route.params.author
-        var offset = (val-1)*5
       },
       // 音频控件
       playAudio(audio_src,audio_name,creator,index){
