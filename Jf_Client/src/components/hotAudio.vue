@@ -4,8 +4,8 @@
     <div class="container-full">
       <el-container>
         <div id="center">
-          <el-main>
-            <ul class="jf_audio">
+          <el-main >
+            <ul class="jf_audio" v-loading="loading">
               <div class="divider col-md-12 col-xs-8">
                 <h4>
                   <span>近期热门</span>
@@ -448,6 +448,7 @@
             this.first_page_hotAudios = res.data.slice(0,5)
             this.hotAudios = res.data
             this.dataLength = res.data.length
+            this.loading = false
           }else {
             this.demo_data_len = res.data
           }
@@ -464,9 +465,11 @@
     },
     async mounted() {
       // 获取音频
+      this.loading = true
       if(!sessionStorage.getItem('hotAudioData')){
-       this.function_axios('get','/ajax/jftime/hotAudios','all_data')
+        this.function_axios('get','/ajax/jftime/hotAudios','all_data')
       }else {
+        this.loading = false
         let demo = JSON.parse(sessionStorage.getItem('hotAudioData'))
         this.first_page_hotAudios = demo.slice(0,5)
         this.hotAudios = demo

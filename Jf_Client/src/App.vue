@@ -251,9 +251,7 @@
             router:'/Sign_'
           }
         ],
-        index:0,
-        font_chose:'color:#ccc;',
-        font_chosed:'color:#fff;'
+        index:0
       };
     },
     methods:{

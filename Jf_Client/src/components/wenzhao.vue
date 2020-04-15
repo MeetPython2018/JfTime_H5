@@ -5,7 +5,7 @@
       <el-container>
         <div id="center">
           <el-main>
-            <ul class="jf_audio">
+            <ul class="jf_audio" v-loading="loading">
               <div class="divider col-md-12 col-xs-8">
                 <h4>
                   <span>{{title}}</span>
@@ -20,8 +20,8 @@
                       </div>
                     </el-image>
                     <h4 class="title">
-                                            {{todo.title}}
-                                        </h4>
+                      {{todo.title}}
+                    </h4>
                     <li class="audioInfos">
                       <span>{{todo.upload_date}}</span>
                       <span>{{todo.audio_time}}</span>
@@ -45,12 +45,12 @@
                     <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
                       <li v-for="i in count" class="list-item">
                         <div>
-                                                  <span><i class="iconfont icon-user-outline"></i> {{i.users}} <i class="iconfont icon-zhifeiji"></i> {{i.audio}}</span>
-                                                  <span> <i class="iconfont icon-riqi"></i> {{new Date(parseInt(i.comment_time)).toLocaleString().replace(/:\d{1,2}$/,' ')}}</span>
-                                              </div>
+                          <span><i class="iconfont icon-user-outline"></i> {{i.users}} <i class="iconfont icon-zhifeiji"></i> {{i.audio}}</span>
+                          <span> <i class="iconfont icon-riqi"></i> {{new Date(parseInt(i.comment_time)).toLocaleString().replace(/:\d{1,2}$/,' ')}}</span>
+                        </div>
                         <p>
-                                                  <i class="iconfont icon-huihua"></i> {{i.content}}
-                                              </p>
+                          <i class="iconfont icon-huihua"></i> {{i.content}}
+                        </p>
                       </li>
                     </ul>
                     <p v-if="loading">加载中...</p>
@@ -102,18 +102,6 @@
       max-width: 1260px!important;
       margin: 0 auto;
       padding: 0 1.5rem;
-  }
-  /*播放按钮*/
-  .audio_menu{
-      position: fixed;
-      height: 3.5rem;
-      left: 0;
-      right: 0;
-      top: 0;
-      margin: 0 auto;
-      width: 15rem;
-      border: 0!important;
-      z-index: 1200;
   }
   .jf_audio{
       width: 100%;
@@ -290,29 +278,22 @@
   export default {
     name: "wenzhao",
     data(){
-            return {
-                btnStyle:'el-icon-video-play',
-                visible: false,
-                active: '',
-                id:'',
-                index:0,
-                play:0,
-                audio_menu:'',
-                flag: false,
-                demo: '',
-                fits:'fill',
-                data_len: this.dataLength,
-                demo_data_len:'',
-                data: '',
-                page_data:'',
-                title:'',
-                title_son:'',
-                offset:0,
-              dialogVisible: false,
+      return {
+        btnStyle:'el-icon-video-play',
+        visible: false,
+        index:0,
+        data_len: this.dataLength,
+        demo_data_len:'',
+        data: '',
+        page_data:'',
+        title:'',
+        title_son:'',
+        offset:0,
+        dialogVisible: false,
         count: 0,
         loading: false
-            };
-        },
+      };
+    },
     methods:{
       //  上下翻页
       handleCurrentChange(val){
@@ -426,18 +407,21 @@
       }
     },
     mounted() {
+      this.loading = true
       fetch("/ajax/wz/dataAudio").then(function (e) {
         return e.json()
       }).then((e)=>{
         this.data = e
+        this.loading = false
       }),
-        fetch("/ajax/wz/dataLength").then(function (e) {
-          return e.json()
-        }).then((e)=>{
-          this.title = '『文昭談古論今』'
-          this.title_son = '华语世界最受欢迎的评论节目之一'
-          this.data_len = e['data_len']
-        })
+      fetch("/ajax/wz/dataLength").then(function (e) {
+        return e.json()
+      }).then((e)=>{
+        this.title = '『文昭談古論今』'
+        this.title_son = '华语世界最受欢迎的评论节目之一'
+        this.data_len = e['data_len']
+        this.loading = false
+      })
     }
   }
 </script>

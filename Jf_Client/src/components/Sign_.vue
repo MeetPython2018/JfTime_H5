@@ -79,27 +79,27 @@
   </div>
 </template>
 <style scoped>
-  * {
-        padding: 0;
-        margin: 0;
-        font-family: '苹方';
-    }
+  *{
+    padding: 0;
+    margin: 0;
+    font-family: '苹方';
+  }
   #signIn {
-      width: 100%;
-      height: auto;
-      font-family: 'Avenir', Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-    }
+    width: 100%;
+    height: auto;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
   .container-full{
-      background: #f7f7f7!important;
+    background: #f7f7f7!important;
   }
   .el-container{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
   }
   .cons{
     width: 100%;
@@ -116,7 +116,6 @@
   }
   .login-div{
     width: 21rem;
-    /*height: 26rem;*/
     height: auto;
     padding: 2rem 1.5rem 1.5rem 1.5rem;
     border-radius: 2rem;
@@ -215,71 +214,71 @@
     padding: 0!important;
   }
   .fields {
-      width: 100%;
-      padding: .5rem .25rem .25rem .25rem;
-    }
+    width: 100%;
+    padding: .5rem .25rem .25rem .25rem;
+  }
   .fields input {
-      border: none;
-      outline:none;
-      background: none;
-      font-size: .89rem;
-      color: #555;
-      padding: .89rem .5rem .89rem .25rem;
-    }
+    border: none;
+    outline:none;
+    background: none;
+    font-size: .89rem;
+    color: #555;
+    padding: .89rem .5rem .89rem .25rem;
+  }
   .iconfont{
-        color: #BEBFC4;
-        padding-right: 1rem;
-    }
+    color: #BEBFC4;
+    padding-right: 1rem;
+  }
   .username, .password {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-      margin-bottom: 1rem;
-      border-radius: 1.1rem;
-      box-shadow: inset 8px 8px 8px #cbced1,
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-radius: 1.1rem;
+    box-shadow: inset 8px 8px 8px #cbced1,
                   inset -8px -8px 8px #ffffff;
-    }
+  }
   .strong{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1rem;
   }
   .strong ul:first-child{
-      width: 100%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
   .strong ul:last-child{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    list-style: none;
   }
   .strong ul:last-child li{
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
   .icon-yuanquan{
-      margin-top: .2rem;
-      padding-right: .3rem;
+    margin-top: .2rem;
+    padding-right: .3rem;
   }
   .icon-duihao{
-      color: #2DAF7D;
+    color: #2DAF7D;
   }
   .el-rate{
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin-left: .5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: .5rem;
   }
   .icon-youxiang-copy,.icon-mima{
-        color: #BEBFC4;
-        padding: 0 .5rem 0 1rem;
+    color: #BEBFC4;
+    padding: 0 .5rem 0 1rem;
   }
   .icon-youtobe{
     color: #D31C1F;
@@ -308,26 +307,26 @@
     transition: 0.5s;
   }
   .signin-button:hover {
-      background:#2fdbb6;
-    }
+    background:#2fdbb6;
+  }
   .signin-button:active {
-      background:#1da88a;
-    }
+    background:#1da88a;
+  }
   .link {
-      padding-top: 20px;
-      text-align: center;
-    }
+    padding-top: 20px;
+    text-align: center;
+  }
   .link a {
-      text-decoration: none;
-      color:#aaa;
-      font-size: 15px;
-    }
+    text-decoration: none;
+    color:#aaa;
+    font-size: 15px;
+  }
   .title{
-      height: 2.5rem;
-      font-size: 1.1rem;
-      color: #a06619;
-      line-height: 2.5rem;
-      margin-bottom: 1rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    color: #a06619;
+    line-height: 2.5rem;
+    margin-bottom: 1rem;
   }
   .btns .el-form-item__content {
     margin-left: 0 !important;
@@ -347,54 +346,53 @@
   }
   /*底部样式*/
   #bottom{
-      width: 100%;
-      background: #fff!important;
+    width: 100%;
+    background: #fff!important;
   }
   .el-footer{
-      width: 100%!important;
-      max-width: 1260px!important;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      height: 3.5rem!important;
+    width: 100%!important;
+    max-width: 1260px!important;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3.5rem!important;
   }
   .links{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .el-footer .links a{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 1rem;
   }
   .el-footer .links a:last-child{
-      margin-right: 0;
+    margin-right: 0;
   }
   .el-footer .links i{
-      font-size: 1.5rem;
+    font-size: 1.5rem;
   }
   .el-footer .words{
-      margin-left: 1rem;
+    margin-left: 1rem;
   }
   .el-footer .words em{
-      font-size: .72rem;
-      letter-spacing: .05rem;
+    font-size: .72rem;
+    letter-spacing: .05rem;
   }
   .el-footer .words em:first-child{
-      margin-right: .5rem;
-      /*margin-left: 6.4rem;*/
+    margin-right: .5rem;
   }
   .el-carousel__item h3 {
-      color: #475669;
-      font-size: 18px;
-      opacity: 0.75;
-      line-height: 300px;
-      margin: 0;
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
   }
 </style>
 <script>

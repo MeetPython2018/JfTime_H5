@@ -72,95 +72,83 @@
 </template>
 <style scoped>
   * {
-      padding: 0;
-      margin: 0;
-      font-family: Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   }
   #JfAudio{
-      width: 100%;
-      font-family: 'Avenir', Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      padding: 0;
-      margin: 0;
-      background: #f7f7f7;
+    width: 100%;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background: #f7f7f7;
   }
   .el-container{
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
   /*音频卡片样式*/
   #center{
-      width: 100%;
-      background: #f5f5f5!important;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: auto;
+    width: 100%;
+    background: #f5f5f5!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
   }
   .el-main{
-      width: 100%!important;
-      max-width: 1260px!important;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-  }
-  /*播放按钮*/
-  .audio_menu{
-      position: fixed;
-      height: 3.5rem;
-      left: 0;
-      right: 0;
-      top: 0;
-      margin: 0 auto;
-      width: 15rem;
-      border: 0!important;
-      z-index: 1200;
+    width: 100%!important;
+    max-width: 1260px!important;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
   .jf_audio{
-      width: 100%;
-      height: auto;
-      list-style: none;
+    width: 100%;
+    height: auto;
+    list-style: none;
   }
   .jf_audio .el-divider i{
-      margin-left: .5rem;
+    margin-left: .5rem;
   }
   .jf_audio .item{
-      width: 100%;
-      height: auto;
+    width: 100%;
+    height: auto;
   }
   .jf_audio .item h3{
-      height: 3rem;
-      margin: 0;
-      text-align: left;
-      line-height: 3rem;
+    height: 3rem;
+    margin: 0;
+    text-align: left;
+    line-height: 3rem;
   }
   .jf_audio .item .jiemu{
-      height: auto;
-      margin: 0;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
+    height: auto;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
   .jf_audio .item .jiemu .col-lg-2{
-      margin-bottom: 1rem;
-      margin-right: 1rem;
-      display: flex;
-      flex-basis: 10rem;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0!important;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-basis: 10rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0!important;
   }
   .jf_audio .item .jiemu div{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      transition: all .5s;
-      background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: all .5s;
+    background: #fff;
   }
   .jf_audio .item .jiemu div:hover{
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
@@ -217,34 +205,34 @@
     .col-xs-6{
         width: 45%!important;
     }
-      .jf_audio .item .jiemu .col-sm-2{
+    .jf_audio .item .jiemu .col-sm-2{
       margin-bottom: 1rem;
       margin-right: 0!important;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0!important;
-      }
+    }
   }
   .col-xs-6 .el-image{
-      width: 100%!important;
-      height: 100%;
+    width: 100%!important;
+    height: 100%;
   }
   .col-xs-6 .title{
-      height: 3.8rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      line-height: 1.3rem;
-      overflow: hidden;
+    height: 3.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.3rem;
+    overflow: hidden;
   }
   /*分页样式*/
   .el-pagination{
-      width: 100%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   .el-pager{
     background: #fff;
@@ -274,10 +262,6 @@
   .divider h5{
     font-size: .64rem;
     margin-right: .5rem;
-  }
-  /*节目卡片浮起特效*/
-  .active{
-    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.1)!important
   }
   .el-image{
     padding: 0!important;
@@ -309,24 +293,8 @@
       return {
         btnStyle:'el-icon-video-play',
         visible: false,
-        active: '',
         id:'',
         index:0,
-        play:0,
-        audio_menu:'',
-        flag: false,
-        demo: '',
-        fits:'fill',
-        data_len:10,
-        selected_items: this.$parent.seletedItems,
-        demo_data_len:'',
-        all_data:'',
-        data: [],
-        page_data:'',
-        title:'',
-        title_son:'',
-        offset:0,
-        skip:{},
         currentPage:1,
         dialogVisible: false,
         count: 0,
