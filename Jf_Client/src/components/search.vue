@@ -1,74 +1,194 @@
 <template>
-    <div id="search">
-        <div class="container-full">
-            <el-container>
-                <div id="center">
-                    <el-main>
-                        <el-input placeholder="请输入内容" v-model="input" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="通过期数查询" value="1"></el-option>
-      <el-option label="通过关键字查询" value="2"></el-option>
-      <el-option label="通过日期查询" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
-                        <div class="sea_con">
-                             <el-table
-    v-loading="loading"
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      prop="date"
-      label="上传日期"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="创作者"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="标题">
-    </el-table-column>
-  </el-table>
-                        </div>
-                    </el-main>
-                </div>
-            </el-container>
-
+  <div id="search">
+    <div class="container-full">
+      <el-container>
+        <div id="center">
+          <el-main>
+            <div class="block">
+              <el-cascader
+                v-model="value"
+                :options="options"
+                @change="handleChange">
+              </el-cascader>
+            </div>
+            <div class="sea_con">
+              <el-table v-loading="loading" :data="tableData" style="width: 100%">
+                <el-table-column prop="upload_date" label="上传日期" width="180"></el-table-column>
+                <el-table-column prop="creator" label="创作者" width="180"></el-table-column>
+                <el-table-column prop="title" label="标题"></el-table-column>
+              </el-table>
+            </div>
+          </el-main>
         </div>
+      </el-container>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "search",
+  export default {
+    name: "search",
     data() {
       return {
-          input: '',
-        select: '',
-          tableData: [{
-          date: '2020-04-01',
-          name: '文昭谈古论今',
-          address: '糧食短缺迫近，要備糧備荒嗎？川普做最壞交底，習近平呢？（文昭談古論今20200401第728期）'
-        }, {
-          date: '2020-03-18',
-          name: '文昭谈古论今',
-          address: '中共驱逐美国记者，川普偷着乐；欧美“佛系”vs大国铁腕，谁将胜出（20200318第720期）'
-        }, {
-          date: '2020-02-06',
-          name: '江峰漫谈',
-          address: '“是美军带到中国的！” 中共外交部惹恼川普？默克尔称德国将有5000万人受影響，美国NBA停赛，汤姆·汉克斯确诊，国会议员在家辦公，這一切離普通人有多远？（江峰漫談20200312第135期）'
-        }],
-        loading: true
+        tableData: [],
+        loading: false,
+        value: [],
+        options: [
+          {
+            value: 'jfmt',
+            label: '江峰漫谈',
+            children: [
+              {
+                value: '2020-03',
+                label: '2020年3月',
+              },
+              {
+                value: '2020-02',
+                label: '2020年2月',
+              },
+              {
+                value: '2020-01',
+                label: '2020年1月',
+              },
+              {
+                value: '2020-12',
+                label: '2019年12月',
+              },
+              {
+                value: '2019-11',
+                label: '2019年11月',
+              },
+              {
+                value: '2019-09',
+                label: '2019年9月',
+              },
+              {
+                value: '2019-08',
+                label: '2019年8月',
+              }
+            ]
+          },
+          {
+            value: 'today_history',
+            label: '历史的今天',
+            children: [
+              {
+                value: '2020-02',
+                label: '2020年2月',
+              },
+              {
+                value: '2020-12',
+                label: '2019年12月',
+              },
+              {
+                value: '2019-11',
+                label: '2019年11月',
+              },
+              {
+                value: '2019-09',
+                label: '2019年9月',
+              },
+              {
+                value: '2019-08',
+                label: '2019年8月',
+              },
+              {
+                value: '2019-07',
+                label: '2019年7月',
+              },
+              {
+                value: '2019-06',
+                label: '2019年6月',
+              },
+            ]
+          },
+          {
+            value: 'trump_twitter',
+            label: '川普推推推',
+            children: [
+              {
+                value: '2019-12',
+                label: '2019年12月',
+              },
+              {
+                value: '2019-11',
+                label: '2019年11月',
+              },
+              {
+                value: '2019-10',
+                label: '2019年10月',
+              },
+              {
+                value: '2019-09',
+                label: '2019年9月',
+              },
+              {
+                value: '2019-08',
+                label: '2019年8月',
+              },
+              {
+                value: '2019-07',
+                label: '2019年7月',
+              },
+              {
+                value: '2019-06',
+                label: '2019年6月',
+              },
+            ]
+          },
+          {
+            value: 'wenzhao',
+            label: '文昭谈古论今',
+            children: [
+              {
+                value: '2020-04',
+                label: '2020年4月',
+              },
+              {
+                value: '2020-03',
+                label: '2020年3月',
+              },
+              {
+                value: '2020-01',
+                label: '2020年1月',
+              },
+              {
+                value: '2019-12',
+                label: '2019年12月',
+              },
+              {
+                value: '2019-11',
+                label: '2019年11月',
+              },
+              {
+                value: '2019-10',
+                label: '2019年10月',
+              },
+              {
+                value: '2019-09',
+                label: '2019年9月',
+              }
+            ]
+          }
+        ],
       };
     },
     methods: {
+      handleChange(){
+        this.$axios.get('/ajax/searchData',
+          {
+            params: {
+              column:this.value[0],
+              month: this.value[1]
+            }
+          }
+        ).then(res=>{
+          this.tableData = res.data
+        })
+      }
 
     },
     mounted() {
-
     }
   }
 </script>

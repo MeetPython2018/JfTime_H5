@@ -2,7 +2,7 @@ from flask import Flask,render_template,request,redirect,session,make_response,s
 import math
 import os
 from data import cursor,db
-from datetime import timedelta
+from datetime import timedelta,date,datetime
 # from flask_session import Session
 from werkzeug.utils import secure_filename
 import time
@@ -110,6 +110,21 @@ def comment():
     db.commit()
     lock.release()
     return json.dumps({'status': 'success'})
+
+
+@app.route("/ajax/searchData")
+def searchData():
+    month = request.args.get("month")
+    cols = request.args.get("column")
+    lock.acquire()
+    sql = "Select * from %s" %cols +" where date_format(upload_date,'%%Y-%%m')=%s"
+    cursor.execute(sql,[month])
+    res = cursor.fetchall()
+    for item in res:
+      if isinstance(item['upload_date'], (datetime, date)):
+        item['upload_date'] = item['upload_date'].strftime('%Y-%m-%d')
+    lock.release()
+    return json.dumps(res)
 
 
 if __name__ == '__main__':

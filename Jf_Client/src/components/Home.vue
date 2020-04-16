@@ -209,11 +209,9 @@
       }
     },
     created(){
-      console.log('created')
       this.setCurrentRoute();
     },
     async mounted() {
-      console.log('mounted')
       if(!sessionStorage.getItem('firstPageDate_Demo')){
         this.function_axios('get','/ajax/jftime/pullAudios','all_data')
       }else {

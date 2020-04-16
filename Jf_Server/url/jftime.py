@@ -1,6 +1,8 @@
 from flask import Blueprint,make_response,send_from_directory,request,jsonify,Flask,session
 from data import cursor,db
+from datetime import datetime,date
 import json
+from bson import json_util
 import threading
 
 lock = threading.Lock()
@@ -28,6 +30,10 @@ def pullAudios():
     lock.release()
     result3 = cursor.fetchall()
     first_page_data.append(result3)
+    for i in first_page_data:
+        for item in i:
+            if isinstance(item['upload_date'], (datetime, date)):
+              item['upload_date'] = item['upload_date'].strftime('%Y-%m-%d')
     return json.dumps(first_page_data)
 
 
@@ -54,7 +60,9 @@ def hotAudios():
     lock.release()
     result4 = cursor.fetchall()
     first_page_data = first_page_data + result4
-    print(first_page_data)
+    for i in first_page_data:
+        if isinstance(i['upload_date'], (datetime, date)):
+            i['upload_date'] = i['upload_date'].strftime('%Y-%m-%d')
     return json.dumps(first_page_data)
 
 
@@ -91,12 +99,21 @@ def handleCurrentChange():
     if (objects == 'jfmt'):
         cursor.execute("SELECT * FROM jfmt order by `index` desc limit %s,5", offset)
         res = cursor.fetchall()
+        for i in res:
+          if isinstance(i['upload_date'], (datetime, date)):
+            i['upload_date'] = i['upload_date'].strftime('%Y-%m-%d')
         return json.dumps(res)
     if (objects == 'today_history'):
         cursor.execute("SELECT * FROM today_history order by `index` desc limit %s,5", offset)
         res = cursor.fetchall()
+        for i in res:
+          if isinstance(i['upload_date'], (datetime, date)):
+            i['upload_date'] = i['upload_date'].strftime('%Y-%m-%d')
         return json.dumps(res)
     if (objects == 'trump_twitter'):
         cursor.execute("SELECT * FROM trump_twitter order by `index` desc limit %s,5", offset)
         res = cursor.fetchall()
+        for i in res:
+          if isinstance(i['upload_date'], (datetime, date)):
+            i['upload_date'] = i['upload_date'].strftime('%Y-%m-%d')
         return json.dumps(res)
